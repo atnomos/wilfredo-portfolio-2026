@@ -955,9 +955,21 @@ button {
    18a. ABOUT PAGE (reuses portrait-single two-panel layout)
    ============================================================================= */
 
+/* About page: swap panel order (text left, photo right) */
+.about-panel {
+  grid-template-columns: 38fr 62fr;
+}
+
+.about-panel .portrait-single__info {
+  border-left: none;
+  border-right: 1px solid var(--c-border);
+}
+
 /* B&W treatment on the photo panel */
 .about-photo {
   filter: grayscale(100%);
+  object-fit: scale-down !important;
+  object-position: center center !important;
 }
 
 .about-text__label {
