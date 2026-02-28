@@ -952,74 +952,140 @@ button {
 
 
 /* =============================================================================
-   18a. ABOUT PAGE (reuses portrait-single two-panel layout)
+   18a. ABOUT PAGE v2
    ============================================================================= */
 
-/* About page: swap panel order (text left, photo right) */
-.about-panel {
-  grid-template-columns: 38fr 62fr;
+/* Nav with frosted dark backdrop */
+.site-nav--backdrop {
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
 }
 
-.about-panel .portrait-single__info {
-  border-left: none;
+/* Two-column layout: text left, photo right */
+.about-v2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+  align-items: center;
+}
+
+/* LEFT: text column */
+.about-v2__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 8rem 3.5rem 4rem 4rem;
   border-right: 1px solid var(--c-border);
-  padding-top: 10rem; /* clear the fixed nav */
+  min-height: 100vh;
+  justify-content: center;
 }
 
-/* B&W treatment on the photo panel */
-.about-photo {
-  filter: grayscale(100%);
-  object-fit: scale-down !important;
-  object-position: center center !important;
-}
-
-.about-text__label {
+.about-v2__label {
   font-family: var(--f-ui);
   font-weight: 200;
   font-size: 0.6rem;
   letter-spacing: 0.4em;
   text-transform: uppercase;
   color: var(--c-text-muted);
+  margin-bottom: 1rem;
 }
 
-.about-text__body {
+.about-v2__name {
+  font-family: var(--f-display);
+  font-weight: 500;
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  letter-spacing: 0.02em;
+  line-height: 1.05;
+  color: var(--c-text);
+  margin-bottom: 0.5rem;
+}
+
+.about-v2__role {
+  font-family: var(--f-ui);
+  font-weight: 200;
+  font-size: 0.64rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--c-text-muted);
+  margin-bottom: 2rem;
+}
+
+.about-v2__body {
   display: flex;
   flex-direction: column;
   gap: 1.1rem;
-  margin-top: 1.4rem;
-  padding-top: 1.4rem;
+  padding-top: 1.8rem;
   border-top: 1px solid var(--c-border);
-  overflow-y: auto;
+  margin-bottom: 2rem;
 }
 
-.about-text__body p {
+.about-v2__body p {
   font-family: var(--f-ui);
   font-weight: 300;
-  font-size: 0.88rem;
+  font-size: 0.9rem;
   line-height: 1.85;
   color: var(--c-text-muted);
 }
 
-.about-text__body p:first-child {
+.about-v2__body p:first-child {
   color: var(--c-text);
 }
 
-.about-text__credits {
+.about-v2__credits {
   display: flex;
   flex-direction: column;
-  gap: 0.45rem;
-  margin-top: 1.6rem;
+  gap: 0.4rem;
   padding-top: 1.4rem;
   border-top: 1px solid var(--c-border);
+  margin-bottom: 2rem;
 }
 
-.about-text__credits span {
+.about-v2__credits span {
   font-family: var(--f-ui);
   font-weight: 200;
   font-size: 0.58rem;
   letter-spacing: 0.28em;
   text-transform: uppercase;
   color: var(--c-text-dim);
+}
+
+/* RIGHT: photo column — centered, edges dissolve into dark bg */
+.about-v2__photo-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 3rem;
+  min-height: 100vh;
+}
+
+.about-v2__photo {
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  display: block;
+  filter: grayscale(100%);
+  /* Radial mask fades the white bg edges into the dark page background */
+  -webkit-mask-image: radial-gradient(ellipse 82% 88% at 50% 48%, black 45%, transparent 92%);
+  mask-image: radial-gradient(ellipse 82% 88% at 50% 48%, black 45%, transparent 92%);
+}
+
+@media (max-width: 768px) {
+  .about-v2 {
+    grid-template-columns: 1fr;
+  }
+
+  .about-v2__text {
+    border-right: none;
+    border-bottom: 1px solid var(--c-border);
+    padding: 7rem 1.5rem 3rem;
+    min-height: 0;
+  }
+
+  .about-v2__photo-col {
+    min-height: 0;
+    padding: 3rem 2rem 4rem;
+  }
 }
 
 

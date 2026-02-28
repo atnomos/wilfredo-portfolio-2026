@@ -11,7 +11,7 @@
 </head>
 <body class="page-enter">
 
-  <nav class="site-nav" aria-label="Site navigation">
+  <nav class="site-nav site-nav--backdrop" aria-label="Site navigation">
     <a href="index.html" class="monogram monogram--sm" aria-label="Home">
       <img src="https://cdn.myportfolio.com/36c1c001-21d8-40e4-af9b-4cc4b1c78dab/3585c5df-0df5-4aa6-91e1-9ca46f0afceb_rwc_0x0x630x630x4096.png?h=abe2bb9f29b4bf25578cbe58fb3e97aa" alt="Wilfredo Valle" />
     </a>
@@ -22,53 +22,50 @@
     </div>
   </nav>
 
-  <div class="portrait-single about-panel">
+  <main class="about-v2">
 
-    <!-- LEFT: info panel -->
-    <div class="portrait-single__info">
+    <!-- LEFT: bio text -->
+    <div class="about-v2__text">
+      <span class="about-v2__label">About</span>
+      <h1 class="about-v2__name">Wilfredo Valle</h1>
+      <p class="about-v2__role">Portrait Photographer &nbsp;·&nbsp; San Francisco</p>
 
-      <div class="portrait-single__text about-text">
-        <span class="about-text__label">About</span>
-        <h1 class="portrait-single__name">Wilfredo Valle</h1>
-        <p class="portrait-single__role">Portrait Photographer &nbsp;·&nbsp; San Francisco</p>
+      <div class="about-v2__body">
+        <p>
+          I photograph people the way you remember them — not posed, not performed, but present.
+          My portraits are quiet studies in character: the weight behind a uniform, the calm before
+          a performance, the warmth in someone who has spent their career in service to others.
+        </p>
+        <p>
+          My path to photography runs through design and storytelling. A BFA from the Academy of
+          Art University gave me the compositional foundation; years as a Creative Trainer at Apple
+          sharpened my eye for what makes a moment connect. Today I work as a Technical Program
+          Manager at Disney, where I think every day about how stories move people — and I bring
+          that same intentionality to every portrait I make.
+        </p>
+        <p>
+          I believe a great portrait is a collaboration. My background in design and program
+          management means I come to every shoot with both a clear visual vision and the structure
+          to put people at ease — so the person in front of the lens can let go and simply
+          be themselves. That's the moment I'm after.
+        </p>
+      </div>
 
-        <div class="about-text__body">
-          <p>
-            I photograph people the way you remember them — not posed, not performed, but present.
-            My portraits are quiet studies in character: the weight behind a uniform, the calm before
-            a performance, the warmth in someone who has spent their career in service to others.
-          </p>
-          <p>
-            My path to photography runs through design and storytelling. A BFA from the Academy of
-            Art University gave me the compositional foundation; years as a Creative Trainer at Apple
-            sharpened my eye for what makes a moment connect. Today I work as a Technical Program
-            Manager at Disney, where I think every day about how stories move people — and I bring
-            that same intentionality to every portrait I make.
-          </p>
-          <p>
-            I believe a great portrait is a collaboration. My background in design and program
-            management means I come to every shoot with both a clear visual vision and the structure
-            to put people at ease — so the person in front of the lens can let go and simply
-            be themselves. That's the moment I'm after.
-          </p>
-        </div>
-
-        <div class="about-text__credits">
-          <span>Disney Entertainment &amp; ESPN Technology</span>
-          <span>Apple Inc.</span>
-          <span>Academy of Art University, BFA</span>
-        </div>
+      <div class="about-v2__credits">
+        <span>Disney Entertainment &amp; ESPN Technology</span>
+        <span>Apple Inc.</span>
+        <span>Academy of Art University, BFA</span>
       </div>
 
       <a href="work.html" class="portrait-single__back">← All Portraits</a>
-
     </div>
 
-    <!-- RIGHT: full-bleed B&W photo -->
-    <div class="portrait-single__photo">
-      <img src="assets/wilfredo-about.jpg" alt="Wilfredo Valle" class="about-photo" />
+    <!-- RIGHT: photo, centered, edges fade to dark -->
+    <div class="about-v2__photo-col">
+      <img src="assets/wilfredo-about.jpg" alt="Wilfredo Valle" class="about-v2__photo" />
     </div>
 
-  </div>
+  </main>
+
 </body>
 </html>
