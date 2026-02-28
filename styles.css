@@ -1,0 +1,925 @@
+/* =============================================================================
+   WILFREDO VALLE — PORTRAIT PHOTOGRAPHY
+   styles.css
+   ============================================================================= */
+
+
+/* -----------------------------------------------------------------------------
+   1. DESIGN TOKENS
+   ----------------------------------------------------------------------------- */
+
+:root {
+  /* Color palette — warm near-white on deep black */
+  --c-text:         #f0eee9;
+  --c-text-muted:   rgba(240, 238, 233, 0.60);
+  --c-text-dim:     rgba(240, 238, 233, 0.35);
+  --c-border:       rgba(240, 238, 233, 0.18);
+  --c-border-hover: rgba(240, 238, 233, 0.45);
+  --c-glass:        rgba(0, 0, 0, 0.28);
+  --c-glass-hover:  rgba(240, 238, 233, 0.09);
+
+  /* Typography */
+  --f-display: 'Syne', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --f-ui:      'DM Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+  /* Easing curve */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+/* -----------------------------------------------------------------------------
+   2. RESET
+   ----------------------------------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--f-ui);
+  color: var(--c-text);
+  background-color: #0d0d0d;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+  font: inherit;
+}
+
+
+/* -----------------------------------------------------------------------------
+   3. BACKGROUND
+   ----------------------------------------------------------------------------- */
+
+/*
+  ┌───────────────────────────────────────────────────────────────────────────┐
+  │  BACKGROUND IMAGE                                                         │
+  │  Replace YOUR_BACKGROUND_IMAGE_HERE with your hosted image URL.           │
+  │  Example:                                                                 │
+  │    background-image: url('/assets/images/background.jpg');                │
+  │  Tip: adjust background-position to frame a specific area of the photo.  │
+  └───────────────────────────────────────────────────────────────────────────┘
+*/
+.bg-image {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-image: url('YOUR_BACKGROUND_IMAGE_HERE');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #111; /* Solid fallback while image loads */
+}
+
+/*
+  Dark scrim overlay.
+  Increase the alpha (currently 0.65) to darken; decrease to lighten.
+*/
+.bg-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.65);
+}
+
+
+/* -----------------------------------------------------------------------------
+   4. SHARED: MONOGRAM CIRCLE
+   ----------------------------------------------------------------------------- */
+
+/*
+  Default: displays "WA" text monogram.
+  To use your portrait photo instead:
+    1. Add the class "monogram--photo" alongside "monogram"
+    2. Replace the URL in .monogram--photo below
+    3. Remove the inner <span class="monogram__text"> from the HTML
+*/
+.monogram {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  border: 1px solid var(--c-border);
+  background-color: var(--c-glass);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+  user-select: none;
+  transition: border-color 400ms var(--ease);
+}
+
+.monogram:hover {
+  border-color: var(--c-border-hover);
+}
+
+.monogram__text {
+  font-family: var(--f-display);
+  font-weight: 500;
+  font-size: 2rem;
+  letter-spacing: 0.12em;
+  color: var(--c-text);
+  line-height: 1;
+}
+
+/* Small variant used inside the nav bar */
+.monogram--sm {
+  width: 42px;
+  height: 42px;
+}
+
+.monogram--sm .monogram__text {
+  font-size: 1.1rem;
+  letter-spacing: 0.06em;
+}
+
+/*
+  ┌───────────────────────────────────────────────────────────────────────────┐
+  │  PORTRAIT PHOTO VARIANT                                                   │
+  │  Replace YOUR_HEADSHOT_HERE with your circular portrait image URL.        │
+  │  Example: url('/assets/images/wilfredo-headshot.jpg')                    │
+  └───────────────────────────────────────────────────────────────────────────┘
+*/
+.monogram--photo {
+  background-image: url('YOUR_HEADSHOT_HERE');
+  background-size: cover;
+  background-position: center;
+}
+
+
+/* -----------------------------------------------------------------------------
+   5. SHARED: SOCIAL LINKS ROW
+   ----------------------------------------------------------------------------- */
+
+.socials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.1rem;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--c-border);
+  color: var(--c-text-muted);
+  font-family: var(--f-ui);
+  font-size: 0.78rem;
+  font-weight: 400;
+  transition:
+    color 360ms var(--ease),
+    border-color 360ms var(--ease),
+    background-color 360ms var(--ease);
+}
+
+.social-link:hover {
+  color: var(--c-text);
+  border-color: var(--c-border-hover);
+  background-color: var(--c-glass-hover);
+}
+
+/* 500px needs smaller text to fit inside the circle */
+.social-link--500px {
+  font-size: 0.5rem;
+  font-weight: 300;
+  flex-direction: column;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+}
+
+
+/* -----------------------------------------------------------------------------
+   6. LANDING SCREEN
+   ----------------------------------------------------------------------------- */
+
+.landing {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  /* Fade-out transition applied via JS */
+  transition:
+    opacity  800ms var(--ease),
+    visibility 800ms var(--ease);
+}
+
+.landing.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.landing__heading {
+  font-family: var(--f-display);
+  font-weight: 400;
+  font-size: clamp(1.45rem, 4vw, 2.2rem);
+  letter-spacing: 0.02em;
+  text-align: center;
+  color: var(--c-text);
+  line-height: 1.25;
+  max-width: 500px;
+  padding: 0 1.5rem;
+}
+
+.landing__sub {
+  font-family: var(--f-ui);
+  font-weight: 200;
+  font-size: 0.67rem;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: var(--c-text-muted);
+}
+
+/* "Enter" pill button */
+.btn-enter {
+  margin-top: 0.2rem;
+  padding: 0.62rem 2rem;
+  border-radius: 100px;
+  border: 1px solid var(--c-border);
+  background-color: var(--c-glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--c-text-muted);
+  font-family: var(--f-ui);
+  font-weight: 300;
+  font-size: 0.67rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  transition:
+    background-color 380ms var(--ease),
+    border-color     380ms var(--ease),
+    color            380ms var(--ease),
+    transform         120ms ease;
+}
+
+.btn-enter:hover {
+  background-color: var(--c-glass-hover);
+  border-color: var(--c-border-hover);
+  color: var(--c-text);
+}
+
+.btn-enter:active {
+  transform: scale(0.97);
+}
+
+
+/* -----------------------------------------------------------------------------
+   7. MAIN CONTENT WRAPPER
+   ----------------------------------------------------------------------------- */
+
+.site-main {
+  position: relative;
+  z-index: 10;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  /* Hidden by default; JS adds .is-revealed */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 800ms var(--ease);
+}
+
+.site-main.is-revealed {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/*
+  Staggered reveal: sections slide up from 20px and fade in.
+  Each .anim-N class carries a distinct transition-delay.
+*/
+.anim {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity   700ms var(--ease),
+    transform 700ms var(--ease);
+}
+
+.site-main.is-revealed .anim-1 { opacity: 1; transform: none; transition-delay:  80ms; }
+.site-main.is-revealed .anim-2 { opacity: 1; transform: none; transition-delay: 220ms; }
+.site-main.is-revealed .anim-3 { opacity: 1; transform: none; transition-delay: 360ms; }
+.site-main.is-revealed .anim-4 { opacity: 1; transform: none; transition-delay: 490ms; }
+
+
+/* -----------------------------------------------------------------------------
+   8. NAVIGATION
+   ----------------------------------------------------------------------------- */
+
+.site-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.4rem 2.5rem;
+}
+
+.site-nav__links {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.site-nav__link {
+  font-family: var(--f-ui);
+  font-weight: 300;
+  font-size: 0.64rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--c-text-muted);
+  position: relative;
+  transition: color 360ms var(--ease);
+}
+
+/* Animated underline on hover */
+.site-nav__link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--c-text);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 360ms var(--ease);
+}
+
+.site-nav__link:hover {
+  color: var(--c-text);
+}
+
+.site-nav__link:hover::after {
+  transform: scaleX(1);
+}
+
+
+/* -----------------------------------------------------------------------------
+   9. HERO / INTRO
+   ----------------------------------------------------------------------------- */
+
+.hero {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 9rem 2rem 4rem;
+  gap: 1.2rem;
+}
+
+.hero__headline {
+  font-family: var(--f-display);
+  font-weight: 400;
+  font-size: clamp(2.8rem, 8vw, 5.6rem);
+  letter-spacing: 0em;
+  line-height: 1;
+  color: var(--c-text);
+  margin-top: 0.4rem;
+}
+
+.hero__sub {
+  font-family: var(--f-ui);
+  font-weight: 200;
+  font-size: 0.64rem;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: var(--c-text-muted);
+}
+
+/* Gently bouncing scroll indicator */
+.scroll-arrow {
+  margin-top: 0.9rem;
+  font-size: 1rem;
+  color: var(--c-text-dim);
+  animation: float-down 2.8s ease-in-out infinite;
+  user-select: none;
+}
+
+@keyframes float-down {
+  0%, 100% { transform: translateY(0);   opacity: 0.40; }
+  50%       { transform: translateY(7px); opacity: 0.75; }
+}
+
+
+/* -----------------------------------------------------------------------------
+   10. PORTRAIT GRID
+   ----------------------------------------------------------------------------- */
+
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.75rem 1.5rem;
+  padding: 1rem 2.5rem 3rem;
+}
+
+.portrait-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  cursor: pointer;
+}
+
+/*
+  Image wrapper maintains 2:3 portrait aspect ratio.
+  Handles hover scale effect on the image.
+*/
+.portrait-card__image-wrap {
+  position: relative;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  background-color: rgba(240, 238, 233, 0.04);
+  border: 1px solid var(--c-border);
+  transition: border-color 400ms var(--ease);
+}
+
+.portrait-card__image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 800ms var(--ease);
+}
+
+.portrait-card:hover .portrait-card__image-wrap {
+  border-color: var(--c-border-hover);
+}
+
+.portrait-card:hover .portrait-card__image-wrap img {
+  transform: scale(1.04);
+}
+
+/* Placeholder shown before real image is inserted */
+.portrait-card__placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.portrait-card__num {
+  font-family: var(--f-display);
+  font-weight: 400;
+  font-size: 1.4rem;
+  color: rgba(240, 238, 233, 0.10);
+  letter-spacing: 0.06em;
+}
+
+/* Subject name below image */
+.portrait-card__name {
+  font-family: var(--f-display);
+  font-weight: 500;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  color: var(--c-text);
+  line-height: 1.2;
+}
+
+/* Subject title / role */
+.portrait-card__title {
+  font-family: var(--f-ui);
+  font-weight: 200;
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--c-text-muted);
+  line-height: 1.4;
+}
+
+
+/* -----------------------------------------------------------------------------
+   11. FOOTER
+   ----------------------------------------------------------------------------- */
+
+.site-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 2rem 2rem 3rem;
+}
+
+.site-footer__copy {
+  font-family: var(--f-ui);
+  font-weight: 200;
+  font-size: 0.58rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--c-text-dim);
+}
+
+
+/* -----------------------------------------------------------------------------
+   12. RESPONSIVE
+   ----------------------------------------------------------------------------- */
+
+/* Tablet: 2-column grid */
+@media (max-width: 900px) {
+  .portfolio-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem 1.25rem;
+    padding: 1rem 2rem 3rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .site-nav {
+    padding: 1.1rem 1.25rem;
+  }
+
+  .site-nav__links {
+    gap: 1.5rem;
+  }
+
+  .site-nav__link {
+    font-size: 0.58rem;
+    letter-spacing: 0.22em;
+  }
+
+  .monogram {
+    width: 80px;
+    height: 80px;
+  }
+
+  .monogram__text {
+    font-size: 1.9rem;
+  }
+
+  .hero {
+    padding: 7rem 1.5rem 3rem;
+    gap: 1rem;
+  }
+
+  /* Single-column portrait grid on mobile */
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 0.5rem 1.5rem 3rem;
+  }
+
+  .portrait-card__image-wrap {
+    aspect-ratio: 3 / 4;
+  }
+
+  .site-footer {
+    padding: 1.5rem 1.5rem 2.5rem;
+    gap: 1rem;
+  }
+
+  .socials {
+    gap: 0.9rem;
+  }
+}
+
+
+/* =============================================================================
+   13. VIDEO BACKGROUND (landing page — Vimeo embed)
+   ============================================================================= */
+
+/*
+  The .video-bg div wraps the Vimeo iframe.
+  The iframe is scaled to always cover the viewport (16:9 source).
+  A dark .bg-overlay (defined earlier) sits on top for readability.
+*/
+.video-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background-color: #080808; /* Shows while video loads */
+}
+
+.video-bg video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /* Scale to cover the viewport regardless of window aspect ratio */
+  width: 177.78vh;  /* 100vh × (16/9) */
+  height: 100vh;
+  min-width: 100vw;
+  min-height: 56.25vw; /* 100vw × (9/16) */
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  object-fit: cover;
+}
+
+
+/* =============================================================================
+   14. PAGE ENTRANCE ANIMATION (all pages except landing)
+   ============================================================================= */
+
+.page-enter {
+  animation: page-fade-in 0.55s var(--ease) both;
+}
+
+@keyframes page-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+
+/* =============================================================================
+   15. WORK PAGE WRAPPER
+   ============================================================================= */
+
+.work-page {
+  position: relative;
+  z-index: 10;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* =============================================================================
+   16. PORTRAIT DETAIL PAGE
+   ============================================================================= */
+
+.portrait-detail {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Full-screen portrait image */
+.portrait-detail__bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
+
+.portrait-detail__bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+/* Gradient: subtle at top, strong at bottom so text is always readable */
+.portrait-detail__gradient {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.88) 0%,
+    rgba(0, 0, 0, 0.35) 45%,
+    rgba(0, 0, 0, 0.10) 100%
+  );
+}
+
+/* Text block at bottom */
+.portrait-detail__content {
+  position: relative;
+  z-index: 10;
+  margin-top: auto;
+  padding: 0 2.5rem 3.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* ← Back to Work link */
+.portrait-detail__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--f-ui);
+  font-weight: 300;
+  font-size: 0.62rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--c-text-muted);
+  text-decoration: none;
+  margin-bottom: 1.6rem;
+  transition: color 360ms var(--ease);
+}
+
+.portrait-detail__back:hover {
+  color: var(--c-text);
+}
+
+.portrait-detail__name {
+  font-family: var(--f-display);
+  font-weight: 500;
+  font-size: clamp(2rem, 5vw, 3.6rem);
+  letter-spacing: 0.03em;
+  line-height: 1;
+  color: var(--c-text);
+}
+
+.portrait-detail__title {
+  font-family: var(--f-ui);
+  font-weight: 200;
+  font-size: 0.68rem;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: var(--c-text-muted);
+  margin-top: 0.65rem;
+}
+
+/* Portrait detail — responsive */
+@media (max-width: 600px) {
+  .portrait-detail__content {
+    padding: 0 1.5rem 2.5rem;
+  }
+}
+
+
+/* =============================================================================
+   17. STUB PAGES (Blog, About Me, Contact)
+   ============================================================================= */
+
+.stub-page {
+  position: relative;
+  z-index: 10;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 6rem 2rem 4rem;
+  gap: 1rem;
+}
+
+.stub-page__title {
+  font-family: var(--f-display);
+  font-weight: 500;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  letter-spacing: 0.04em;
+  color: var(--c-text);
+}
+
+.stub-page__msg {
+  font-family: var(--f-ui);
+  font-weight: 200;
+  font-size: 0.66rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--c-text-muted);
+}
+
+
+/* =============================================================================
+   18. PORTRAIT SINGLE PAGE (two-panel editorial layout)
+   ============================================================================= */
+
+/*
+  Two-column grid: photo panel (left, 62%) + info panel (right, 38%).
+  On mobile it stacks vertically.
+*/
+.portrait-single {
+  display: grid;
+  grid-template-columns: 62fr 38fr;
+  min-height: 100vh;
+  background: #0d0d0d;
+}
+
+/* ── LEFT: Photo panel ───────────────────────────────────────────────────────── */
+
+.portrait-single__photo {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+}
+
+.portrait-single__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+/* ── RIGHT: Info panel ───────────────────────────────────────────────────────── */
+
+.portrait-single__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2rem 2.5rem 2.5rem;
+  border-left: 1px solid var(--c-border);
+  min-height: 100vh;
+}
+
+/* Top: logo + nav links (stacked right-aligned) */
+.portrait-single__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.portrait-single__nav-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.7rem;
+}
+
+/* Middle: name + title */
+.portrait-single__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.portrait-single__name {
+  font-family: var(--f-display);
+  font-weight: 500;
+  font-size: clamp(1.8rem, 2.8vw, 3rem);
+  letter-spacing: 0.03em;
+  line-height: 1.05;
+  color: var(--c-text);
+}
+
+.portrait-single__role {
+  font-family: var(--f-ui);
+  font-weight: 200;
+  font-size: 0.65rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--c-text-muted);
+}
+
+/* Bottom: back link */
+.portrait-single__back {
+  font-family: var(--f-ui);
+  font-weight: 300;
+  font-size: 0.62rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--c-text-muted);
+  text-decoration: none;
+  transition: color 360ms var(--ease);
+}
+
+.portrait-single__back:hover {
+  color: var(--c-text);
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .portrait-single {
+    grid-template-columns: 1fr;
+  }
+
+  .portrait-single__photo {
+    height: 65vh;
+    min-height: 0;
+  }
+
+  .portrait-single__info {
+    border-left: none;
+    border-top: 1px solid var(--c-border);
+    min-height: 0;
+    padding: 1.75rem 1.5rem 2rem;
+  }
+
+  .portrait-single__nav-links {
+    flex-direction: row;
+    gap: 1.25rem;
+  }
+}

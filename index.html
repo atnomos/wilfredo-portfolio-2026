@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wilfredo Valle — San Francisco Portrait Photographer</title>
+  <meta name="description" content="A collection of portrait photography by Wilfredo Valle, San Francisco." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=DM+Sans:wght@200;300;400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ==========================================================================
+       BACKGROUND VIDEO
+       Source: your Adobe Portfolio CDN video (9363sQxKxwQ), served locally
+       as assets/bg-video.mp4 and via CDN at multiple responsive widths.
+       ========================================================================== -->
+  <div class="video-bg" aria-hidden="true">
+    <video
+      autoplay
+      loop
+      muted
+      playsinline
+      preload="auto"
+    >
+      <!-- Local copy (copied from your Downloads folder) -->
+      <source src="assets/bg-video.mp4" type="video/mp4" />
+      <!-- CDN fallback at multiple widths — matches your live site exactly -->
+      <source src="https://cdn.myportfolio.com/v1/ccvproxy/9363sQxKxwQ?width=1920&type=mp4&h=878adb8e2c68293fcc69d048f0326e53" type="video/mp4" />
+      <source src="https://cdn.myportfolio.com/v1/ccvproxy/9363sQxKxwQ?width=1280&type=mp4&h=932f601ded93ceb80baedaef9549ffcc" type="video/mp4" />
+    </video>
+  </div>
+
+  <!-- Dark overlay over the video for text readability -->
+  <div class="bg-overlay" aria-hidden="true"></div>
+
+  <!-- ==========================================================================
+       LANDING SCREEN
+       ========================================================================== -->
+  <section id="js-landing" class="landing" aria-label="Portfolio entry">
+
+    <!--
+      CIRCULAR LOGO — Using your actual headshot from the site.
+      The image below is pulled from your Adobe Portfolio CDN.
+      Replace the src if you want to use a different photo.
+    -->
+    <a href="work.html" class="monogram" aria-label="Home — Wilfredo Valle">
+      <img
+        src="https://cdn.myportfolio.com/36c1c001-21d8-40e4-af9b-4cc4b1c78dab/3585c5df-0df5-4aa6-91e1-9ca46f0afceb_rwc_0x0x630x630x4096.png?h=abe2bb9f29b4bf25578cbe58fb3e97aa"
+        alt="Wilfredo Valle"
+      />
+    </a>
+
+    <p class="landing__sub">A Collection of my portraits.</p>
+
+    <!-- "Enter" fades the landing and navigates to work.html -->
+    <button class="btn-enter" id="js-enter" aria-label="Enter portfolio">
+      Enter
+    </button>
+
+    <!-- Social links -->
+    <nav class="socials" aria-label="Social profiles">
+      <a href="https://x.com/wilfredovalle"       class="social-link" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" title="X">𝕏</a>
+      <a href="https://linkedin.com/in/wvalle"    class="social-link" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn">in</a>
+      <a href="https://medium.com/@aboutWilfredo" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Medium" title="Medium">M</a>
+      <a href="https://500px.com/wilfredovalle"   class="social-link social-link--500px" target="_blank" rel="noopener noreferrer" aria-label="500px" title="500px"><span>500</span><span>px</span></a>
+    </nav>
+
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
