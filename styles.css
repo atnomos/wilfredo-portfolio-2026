@@ -952,6 +952,125 @@ button {
 
 
 /* =============================================================================
+   18a. ABOUT PAGE
+   ============================================================================= */
+
+.about-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8rem 2rem 5rem;
+}
+
+.about-page__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 640px;
+  width: 100%;
+  gap: 2.5rem;
+}
+
+/* Header block: label, photo, name, title */
+.about-page__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.1rem;
+  text-align: center;
+}
+
+.about-page__label {
+  font-family: var(--f-ui);
+  font-weight: 200;
+  font-size: 0.62rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--c-text-muted);
+}
+
+.about-page__photo {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid var(--c-border);
+}
+
+.about-page__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.about-page__name {
+  font-family: var(--f-display);
+  font-weight: 500;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  letter-spacing: 0.02em;
+  color: var(--c-text);
+  line-height: 1;
+}
+
+.about-page__title {
+  font-family: var(--f-ui);
+  font-weight: 200;
+  font-size: 0.64rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--c-text-muted);
+}
+
+/* Body: three paragraphs */
+.about-page__body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  border-top: 1px solid var(--c-border);
+  padding-top: 2.5rem;
+}
+
+.about-page__body p {
+  font-family: var(--f-ui);
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.85;
+  color: var(--c-text-muted);
+}
+
+.about-page__body p:first-child {
+  color: var(--c-text);
+}
+
+/* Footer credentials row */
+.about-page__credits {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem 2rem;
+  border-top: 1px solid var(--c-border);
+  padding-top: 1.75rem;
+  width: 100%;
+}
+
+.about-page__credits span {
+  font-family: var(--f-ui);
+  font-weight: 200;
+  font-size: 0.6rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--c-text-dim);
+}
+
+@media (max-width: 600px) {
+  .about-page {
+    padding: 7rem 1.5rem 4rem;
+  }
+}
+
+
+/* =============================================================================
    18. PORTRAIT SINGLE PAGE (two-panel editorial layout)
    ============================================================================= */
 
