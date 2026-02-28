@@ -513,6 +513,15 @@ button {
   color: var(--c-text-muted);
 }
 
+.hero__location {
+  font-family: var(--f-display);
+  font-weight: 500;
+  font-size: clamp(1.6rem, 4vw, 2.8rem);
+  letter-spacing: 0.02em;
+  color: var(--c-text);
+  line-height: 1.1;
+}
+
 /* Gently bouncing scroll indicator */
 .scroll-arrow {
   margin-top: 0.9rem;
