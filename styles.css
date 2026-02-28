@@ -963,6 +963,7 @@ button {
 .about-panel .portrait-single__info {
   border-left: none;
   border-right: 1px solid var(--c-border);
+  padding-top: 10rem; /* clear the fixed nav */
 }
 
 /* B&W treatment on the photo panel */
