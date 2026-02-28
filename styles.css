@@ -148,6 +148,48 @@ button {
   line-height: 1;
 }
 
+/* Landing page: larger size, no border (ring wrapper handles it) */
+.monogram--landing {
+  width: 152px;
+  height: 152px;
+  border: none;
+}
+
+/*
+  Shiny silver ring wrapping the landing logo.
+  Uses a conic-gradient to simulate a polished metallic surface —
+  highlights at top-right, shadows at bottom-left.
+*/
+.logo-ring {
+  padding: 3px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 125deg,
+    #4a4a4a   0deg,
+    #b0b0b0  50deg,
+    #e8e8e8  85deg,
+    #ffffff 110deg,
+    #f0f0f0 135deg,
+    #c8c8c8 165deg,
+    #888888 210deg,
+    #5a5a5a 250deg,
+    #aaaaaa 295deg,
+    #4a4a4a 360deg
+  );
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 0 28px rgba(200, 200, 200, 0.18),
+    0 4px 20px rgba(0, 0, 0, 0.55);
+  transition: box-shadow 400ms var(--ease);
+}
+
+.logo-ring:hover {
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.14),
+    0 0 40px rgba(220, 220, 220, 0.28),
+    0 4px 24px rgba(0, 0, 0, 0.55);
+}
+
 /* Small variant used inside the nav bar */
 .monogram--sm {
   width: 42px;
