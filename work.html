@@ -12,9 +12,6 @@
 </head>
 <body class="page-enter">
 
-  <div class="bg-image"   aria-hidden="true"></div>
-  <div class="bg-overlay" aria-hidden="true"></div>
-
   <div class="work-page">
 
     <!-- NAV -->
@@ -29,12 +26,19 @@
       </div>
     </nav>
 
-    <!-- HERO -->
-    <section class="hero" aria-label="Introduction">
-      <h1 class="hero__headline">Hi, I'm Wilfredo!</h1>
-      <p class="hero__sub">Portrait Photographer</p>
-      <div class="scroll-arrow" aria-hidden="true">↓</div>
-    </section>
+    <!-- MASTHEAD: video covers top third, hero text centered inside -->
+    <div class="masthead" aria-hidden="false">
+      <video class="masthead__video" autoplay loop muted playsinline preload="auto">
+        <source src="assets/mastheadvideo.mp4" type="video/mp4" />
+      </video>
+      <div class="masthead__overlay" aria-hidden="true"></div>
+
+      <section class="hero" aria-label="Introduction">
+        <h1 class="hero__headline">Hi, I'm Wilfredo!</h1>
+        <p class="hero__sub">Portrait Photographer</p>
+        <div class="scroll-arrow" aria-hidden="true">↓</div>
+      </section>
+    </div>
 
     <!-- PORTRAIT GRID
          Replace each placeholder with your image when ready:

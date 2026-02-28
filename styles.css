@@ -285,6 +285,51 @@ button {
   pointer-events: none;
 }
 
+/* ── Logo intro: ring sweeps in, photo stays upright ── */
+.logo-ring {
+  animation:
+    logo-fade-scale 1s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both,
+    ring-sweep      1s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+}
+
+/* Counter-rotate the inner circle so the photo stays face-up */
+.logo-ring .monogram--landing {
+  animation: ring-counter 1s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+}
+
+@keyframes logo-fade-scale {
+  from { opacity: 0; scale: 0.72; }
+  to   { opacity: 1; scale: 1; }
+}
+
+@keyframes ring-sweep {
+  from { rotate: -300deg; }
+  to   { rotate: 0deg; }
+}
+
+@keyframes ring-counter {
+  from { rotate: 300deg; }
+  to   { rotate: 0deg; }
+}
+
+/* ── Staggered reveal for subtitle, button, socials ── */
+.landing__sub {
+  animation: landing-item-in 0.7s var(--ease) 1s both;
+}
+
+.btn-enter {
+  animation: landing-item-in 0.7s var(--ease) 1.2s both;
+}
+
+.landing .socials {
+  animation: landing-item-in 0.7s var(--ease) 1.4s both;
+}
+
+@keyframes landing-item-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 .landing__heading {
   font-family: var(--f-display);
   font-weight: 400;
@@ -710,6 +755,59 @@ button {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+
+/* =============================================================================
+   15a. MASTHEAD (work page — video covering top third)
+   ============================================================================= */
+
+/*
+  The masthead sits at the top of the work page and fills ~1/3 of the viewport.
+  The nav is fixed above it; the portrait grid sits below it.
+*/
+.masthead {
+  position: relative;
+  height: 50vh;
+  min-height: 340px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+/* Full-bleed video, always covers the masthead area */
+.masthead__video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 100%;
+  min-height: 100%;
+  width: 177.78vh;
+  height: 56.25vw;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* Dark scrim — matches the reference image tone */
+.masthead__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.52);
+}
+
+/* Hero text sits above the overlay */
+.masthead .hero {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  padding-top: 5rem; /* clear the fixed nav */
+  padding-bottom: 1.5rem;
+}
+
+@media (max-width: 600px) {
+  .masthead {
+    height: 45vh;
+  }
 }
 
 
