@@ -7,7 +7,7 @@
 (function () {
   'use strict';
 
-  if (sessionStorage.getItem('intro-seen')) return;
+  if (sessionStorage.getItem('intro-seen')) { intro.remove(); return; }
 
   var intro = document.getElementById('js-intro');
   if (!intro) return;
@@ -105,6 +105,16 @@
     }, 800); // matches the 800ms transition on .landing.is-hidden
   });
 
+}());
+
+(function () {
+  'use strict';
+  var replayBtn = document.getElementById('js-replay');
+  if (!replayBtn) return;
+  replayBtn.addEventListener('click', function () {
+    sessionStorage.removeItem('intro-seen');
+    window.location.reload();
+  });
 }());
 
 (function () {

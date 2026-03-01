@@ -400,6 +400,29 @@ button {
   transform: scale(0.97);
 }
 
+.btn-replay {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: none;
+  border: none;
+  color: rgba(243, 241, 238, 0.28);
+  font-family: var(--f-ui);
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 0;
+  white-space: nowrap;
+  transition: color 200ms;
+  animation: landing-item-in 0.7s var(--ease) 2s both;
+}
+
+.btn-replay:hover {
+  color: rgba(243, 241, 238, 0.65);
+}
+
 
 /* -----------------------------------------------------------------------------
    7. MAIN CONTENT WRAPPER
