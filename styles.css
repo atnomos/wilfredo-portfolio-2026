@@ -564,10 +564,6 @@ button {
     filter    480ms ease-out;
 }
 
-/* Column-aware stagger — cascades left to right per row */
-.portrait-card:nth-child(3n + 2) { transition-delay: 130ms; }
-.portrait-card:nth-child(3n + 3) { transition-delay: 260ms; }
-
 .portrait-card.is-visible {
   opacity: 1;
   transform: none;
@@ -603,20 +599,14 @@ button {
   background: rgba(240, 238, 233, 0.07);
 }
 
-/* Scroll-driven parallax — image floats as card travels through viewport */
-@keyframes img-parallax {
-  from { transform: scale(1.1) translateY(-6%); }
-  to   { transform: scale(1.1) translateY(6%);  }
-}
-
 .portrait-card__image-wrap img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  animation: img-parallax linear both;
-  animation-timeline: view(block);
-  animation-range: entry 0% exit 100%;
+  transform: scale(1.1);
+  transition: transform 80ms linear;
+  will-change: transform;
 }
 
 /* Placeholder shown before real image is inserted */

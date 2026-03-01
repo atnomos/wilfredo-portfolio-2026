@@ -121,17 +121,42 @@
   </div>
 
   <script>
-    // Reveal portrait cards as they scroll into view
     const cards = document.querySelectorAll('.portrait-card');
+
+    // ── Scroll entrance: each card staggers in individually ─────────────────
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.08 });
+      entries
+        .filter(e => e.isIntersecting)
+        .forEach((entry, i) => {
+          setTimeout(() => {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }, i * 120);
+        });
+    }, {
+      threshold: 0.12,
+      rootMargin: '0px 0px -60px 0px'  // card must be 60px inside viewport
+    });
+
     cards.forEach(card => observer.observe(card));
+
+    // ── Hover parallax: mouse position shifts image inside frame ─────────────
+    cards.forEach(card => {
+      const wrap = card.querySelector('.portrait-card__image-wrap');
+      const img  = card.querySelector('.portrait-card__image-wrap img');
+
+      wrap.addEventListener('mousemove', (e) => {
+        const rect = wrap.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width  - 0.5; // -0.5 → 0.5
+        const y = (e.clientY - rect.top)  / rect.height - 0.5;
+        // Image moves opposite to cursor — reveals what's "behind" the frame
+        img.style.transform = `scale(1.1) translate(${x * -22}px, ${y * -22}px)`;
+      });
+
+      wrap.addEventListener('mouseleave', () => {
+        img.style.transform = 'scale(1.1) translate(0px, 0px)';
+      });
+    });
   </script>
 
 </body>
