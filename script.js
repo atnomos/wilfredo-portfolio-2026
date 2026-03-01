@@ -19,7 +19,8 @@
 
   // --- Matrix rain ---
   var FONT_SIZE = 14;
-  var CHARS = '01101001011010011011010110100101101001010110100110110101アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホ';
+  var CHARS      = '01101001011010011011010110100101101001010110100110110101アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホ';
+  var NAME_CHARS = 'WILFREDOVALE';
   var drops, rainInterval;
 
   function initCanvas() {
@@ -39,10 +40,23 @@
     ctx.font = FONT_SIZE + 'px monospace';
 
     for (var i = 0; i < drops.length; i++) {
-      var char = CHARS[Math.floor(Math.random() * CHARS.length)];
-      // Head character is bright; trail fades naturally from the overlay
-      ctx.fillStyle = drops[i] === 1 ? '#ccffcc' : '#00ff41';
+      // 8% chance to inject a letter from the name with a random glow
+      var isName = Math.random() < 0.08;
+      var char = isName
+        ? NAME_CHARS[Math.floor(Math.random() * NAME_CHARS.length)]
+        : CHARS[Math.floor(Math.random() * CHARS.length)];
+
+      if (isName) {
+        ctx.shadowColor = '#00ff41';
+        ctx.shadowBlur  = 10 + Math.random() * 25;
+        ctx.fillStyle   = Math.random() < 0.4 ? '#ffffff' : '#ccffcc';
+      } else {
+        ctx.shadowBlur = 0;
+        ctx.fillStyle  = drops[i] === 1 ? '#ccffcc' : '#00ff41';
+      }
+
       ctx.fillText(char, i * FONT_SIZE, drops[i] * FONT_SIZE);
+      ctx.shadowBlur = 0; // always reset so glow doesn't bleed
 
       if (drops[i] * FONT_SIZE > canvas.height && Math.random() > 0.975) {
         drops[i] = 0;
