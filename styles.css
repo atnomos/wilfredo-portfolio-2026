@@ -2053,19 +2053,19 @@ body.about-page .portrait-single__back:hover {
   right: 2.5rem;
   z-index: 2;
   font-family: var(--f-ui);
-  font-size: 0.55rem;
-  letter-spacing: 0.3em;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: rgba(243, 241, 238, 0.18);
+  color: rgba(243, 241, 238, 0.4);
   background: none;
   border: none;
   cursor: pointer;
-  transition: color 300ms;
-  padding: 0.5rem;
+  transition: color 200ms;
+  padding: 0;
 }
 
 .word-intro__skip:hover {
-  color: rgba(243, 241, 238, 0.5);
+  color: rgba(243, 241, 238, 0.8);
 }
 
 
