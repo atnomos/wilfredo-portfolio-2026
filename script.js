@@ -57,10 +57,17 @@
 
   // --- Typewriter ---
   var WORDS      = ['Creative', 'Designer', 'Technologist', 'Program Manager', 'AI Evangelist'];
-  var CHAR_DELAY = 90;
-  var HOLD       = 700;
-  var CLEAR_GAP  = 180;
+  var HOLD      = 900;
+  var CLEAR_GAP = 220;
   var timer;
+
+  // Randomised delay per character — mimics natural typing rhythm
+  function charDelay(ch) {
+    var base = ch === ' ' ? 180 : 120;          // spaces feel like a beat
+    var jitter = Math.random() * 100;            // ±0–100ms natural variance
+    var hesitate = Math.random() < 0.12 ? 200 : 0; // occasional micro-pause
+    return base + jitter + hesitate;
+  }
 
   function dismiss() {
     clearTimeout(timer);
@@ -86,7 +93,7 @@
     var word = WORDS[wordIdx];
     display.textContent = word.slice(0, charIdx);
     if (charIdx < word.length) {
-      timer = setTimeout(function () { typeWord(wordIdx, charIdx + 1); }, CHAR_DELAY);
+      timer = setTimeout(function () { typeWord(wordIdx, charIdx + 1); }, charDelay(word[charIdx]));
     } else {
       timer = setTimeout(function () {
         display.textContent = '';
