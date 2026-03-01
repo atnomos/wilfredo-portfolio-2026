@@ -1593,12 +1593,18 @@ body.about-page .portrait-single__back:hover {
 
 .blog-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 3rem 2rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem 1.5rem;
   padding: 0 2.5rem 6rem;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 900px) {
+  .blog-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
   .blog-grid {
     grid-template-columns: 1fr;
     padding: 0 1.5rem 5rem;
@@ -1634,7 +1640,7 @@ body.about-page .portrait-single__back:hover {
 }
 
 .blog-card__cover {
-  aspect-ratio: 2 / 3;
+  aspect-ratio: 3 / 2;
   overflow: hidden;
   transition: border-color 400ms var(--ease);
   border: 1px solid transparent;
@@ -1982,6 +1988,86 @@ body.about-page .portrait-single__back:hover {
   position: absolute;
   inset: 0;
 }
+
+/* =============================================================================
+   WORD INTRO OVERLAY
+   ============================================================================= */
+
+.word-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 600ms var(--ease), visibility 600ms var(--ease);
+}
+
+.word-intro.is-done {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.word-intro__canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.word-intro::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.65);
+}
+
+.word-intro__display,
+.word-intro__cursor {
+  position: relative;
+  z-index: 2;
+  font-family: var(--f-display);
+  font-weight: 600;
+  font-size: clamp(3rem, 10vw, 8rem);
+  color: #00ff41;
+  letter-spacing: -0.02em;
+  text-shadow: 0 0 12px rgba(0, 255, 65, 0.9), 0 0 40px rgba(0, 255, 65, 0.35);
+}
+
+.word-intro__cursor {
+  font-weight: 200;
+  margin-left: 0.05em;
+  animation: cursor-blink 0.7s step-end infinite;
+}
+
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+.word-intro__skip {
+  position: absolute;
+  bottom: 2.5rem;
+  right: 2.5rem;
+  z-index: 2;
+  font-family: var(--f-ui);
+  font-size: 0.55rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(243, 241, 238, 0.18);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 300ms;
+  padding: 0.5rem;
+}
+
+.word-intro__skip:hover {
+  color: rgba(243, 241, 238, 0.5);
+}
+
 
 /* AI / creativity — deep violet bloom, blue accent */
 .post-cover__graphic--ai {

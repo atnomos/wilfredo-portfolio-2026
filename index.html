@@ -13,6 +13,15 @@
 <body>
 
   <!-- ==========================================================================
+       WORD INTRO OVERLAY
+       ========================================================================== -->
+  <div id="js-intro" class="word-intro" aria-live="polite" aria-label="Intro sequence">
+    <canvas class="word-intro__canvas" aria-hidden="true"></canvas>
+    <span class="word-intro__display"></span><span class="word-intro__cursor">|</span>
+    <button class="word-intro__skip" aria-label="Skip intro">Skip</button>
+  </div>
+
+  <!-- ==========================================================================
        BACKGROUND VIDEO
        ========================================================================== -->
   <div class="video-bg" aria-hidden="true">
