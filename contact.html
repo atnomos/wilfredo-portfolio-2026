@@ -10,10 +10,8 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body class="page-enter">
-  <div class="bg-image"   aria-hidden="true"></div>
-  <div class="bg-overlay" aria-hidden="true"></div>
 
-  <nav class="site-nav" aria-label="Site navigation">
+  <nav class="site-nav site-nav--backdrop" aria-label="Site navigation">
     <a href="index.html" class="monogram monogram--sm" aria-label="Home">
       <img src="https://cdn.myportfolio.com/36c1c001-21d8-40e4-af9b-4cc4b1c78dab/3585c5df-0df5-4aa6-91e1-9ca46f0afceb_rwc_0x0x630x630x4096.png?h=abe2bb9f29b4bf25578cbe58fb3e97aa" alt="Wilfredo Valle" />
     </a>
@@ -24,10 +22,81 @@
     </div>
   </nav>
 
-  <main class="stub-page" aria-label="Contact">
-    <h1 class="stub-page__title">Contact</h1>
-    <p class="stub-page__msg">Coming soon</p>
+  <main class="contact-v2">
+
+    <!-- LEFT: personal info -->
+    <div class="contact-v2__info">
+      <span class="contact-v2__label">Contact</span>
+      <h1 class="contact-v2__heading">I'm open for portrait sessions &amp; collaborations.</h1>
+      <a href="mailto:willvalle@me.com" class="contact-v2__email">willvalle@me.com</a>
+      <div class="contact-v2__socials">
+        <a href="https://www.linkedin.com/in/wilfredo-tpm/" target="_blank" rel="noopener noreferrer" class="contact-v2__social-row">
+          <span>LinkedIn</span>
+          <span>↗</span>
+        </a>
+        <a href="https://x.com/atnomos" target="_blank" rel="noopener noreferrer" class="contact-v2__social-row">
+          <span>X &nbsp;/&nbsp; @atnomos</span>
+          <span>↗</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- RIGHT: form -->
+    <div class="contact-v2__form-col">
+      <form class="contact-form" id="contact-form">
+        <input type="hidden" name="access_key" value="cb6796f0-8671-47e8-a525-5b76139153cc" />
+        <input type="hidden" name="subject" value="New message from wilfredovalle.com" />
+        <input type="hidden" name="redirect" value="false" />
+
+        <div class="contact-form__field">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" placeholder="Your name" required />
+        </div>
+        <div class="contact-form__field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="your@email.com" required />
+        </div>
+        <div class="contact-form__field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="6" placeholder="Tell me about your project…" required></textarea>
+        </div>
+        <button type="submit" class="contact-form__submit" id="submit-btn">Send Message</button>
+        <p class="contact-form__status" id="form-status" aria-live="polite"></p>
+      </form>
+    </div>
+
   </main>
+
+  <script>
+    const form   = document.getElementById('contact-form');
+    const btn    = document.getElementById('submit-btn');
+    const status = document.getElementById('form-status');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      btn.textContent = 'Sending…';
+      btn.disabled = true;
+
+      const data = new FormData(form);
+      const res  = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: data
+      });
+      const json = await res.json();
+
+      if (json.success) {
+        form.reset();
+        status.textContent = 'Message sent — thank you.';
+        status.dataset.state = 'ok';
+      } else {
+        status.textContent = 'Something went wrong. Please try again.';
+        status.dataset.state = 'err';
+      }
+
+      btn.textContent = 'Send Message';
+      btn.disabled = false;
+    });
+  </script>
 
 </body>
 </html>
