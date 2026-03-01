@@ -20,3 +20,17 @@
   });
 
 }());
+
+(function () {
+  'use strict';
+  var video = document.querySelector('.monogram--landing video');
+  var img   = document.querySelector('.logo-static');
+  if (!video || !img) return;
+
+  video.addEventListener('ended', function () {
+    video.style.opacity = '0';
+    video.style.pointerEvents = 'none';
+    img.style.opacity = '1';
+    img.style.pointerEvents = 'auto';
+  });
+}());
