@@ -621,24 +621,36 @@ button {
   letter-spacing: 0.06em;
 }
 
-/* Subject name below image */
+/* Name + title overlaid on image */
+.portrait-card__caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 3rem 1.25rem 1.25rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.72) 0%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  z-index: 2;
+}
+
 .portrait-card__name {
   font-family: var(--f-display);
   font-weight: 500;
   font-size: 0.95rem;
   letter-spacing: 0.04em;
-  color: var(--c-text);
+  color: #fff;
   line-height: 1.2;
 }
 
-/* Subject title / role */
 .portrait-card__title {
   font-family: var(--f-ui);
   font-weight: 200;
-  font-size: 0.62rem;
-  letter-spacing: 0.18em;
+  font-size: 0.58rem;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--c-text-muted);
+  color: rgba(255, 255, 255, 0.65);
   line-height: 1.4;
 }
 
