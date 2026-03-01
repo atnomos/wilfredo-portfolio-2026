@@ -7,10 +7,10 @@
 (function () {
   'use strict';
 
-  if (sessionStorage.getItem('intro-seen')) { intro.remove(); return; }
-
   var intro = document.getElementById('js-intro');
   if (!intro) return;
+
+  if (sessionStorage.getItem('intro-seen')) { intro.remove(); return; }
 
   var display = intro.querySelector('.word-intro__display');
   var skipBtn = intro.querySelector('.word-intro__skip');
