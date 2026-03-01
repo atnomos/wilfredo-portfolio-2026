@@ -544,8 +544,8 @@ button {
 .portfolio-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.75rem 1.5rem;
-  padding: 1rem 2.5rem 3rem;
+  gap: 0;
+  padding: 0;
 }
 
 .portrait-card {
@@ -576,8 +576,6 @@ button {
   aspect-ratio: 2 / 3;
   overflow: hidden;
   background-color: rgba(240, 238, 233, 0.04);
-  border: 1px solid var(--c-border);
-  transition: border-color 400ms var(--ease);
 }
 
 /* Hover: warm shimmer overlay (image scale removed — parallax owns transform) */
@@ -591,9 +589,6 @@ button {
   z-index: 1;
 }
 
-.portrait-card:hover .portrait-card__image-wrap {
-  border-color: var(--c-border-hover);
-}
 
 .portrait-card:hover .portrait-card__image-wrap::after {
   background: rgba(240, 238, 233, 0.07);
@@ -678,8 +673,8 @@ button {
 @media (max-width: 900px) {
   .portfolio-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem 1.25rem;
-    padding: 1rem 2rem 3rem;
+    gap: 0;
+    padding: 0;
   }
 }
 
@@ -715,8 +710,8 @@ button {
   /* Single-column portrait grid on mobile */
   .portfolio-grid {
     grid-template-columns: 1fr;
-    gap: 2rem;
-    padding: 0.5rem 1.5rem 3rem;
+    gap: 0;
+    padding: 0;
   }
 
   .portrait-card__image-wrap {
