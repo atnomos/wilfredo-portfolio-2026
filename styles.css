@@ -1926,3 +1926,27 @@ body.about-page .portrait-single__back:hover {
 .post-back:hover {
   color: var(--c-text);
 }
+
+
+/* ── Post cover: CSS graphic variants ───────────────────────────────────────── */
+
+.post-cover__graphic {
+  position: absolute;
+  inset: 0;
+}
+
+/* AI / creativity — deep violet bloom, blue accent */
+.post-cover__graphic--ai {
+  background:
+    radial-gradient(ellipse at 25% 55%, rgba(109, 40, 217, 0.55) 0%, transparent 55%),
+    radial-gradient(ellipse at 75% 25%, rgba(37, 99, 235, 0.22) 0%, transparent 45%),
+    #08080f;
+}
+
+/* Portrait / photography — warm amber studio light */
+.post-cover__graphic--portrait {
+  background:
+    radial-gradient(ellipse at 65% 60%, rgba(120, 53, 15, 0.70) 0%, transparent 52%),
+    radial-gradient(ellipse at 28% 35%, rgba(146, 64, 14, 0.28) 0%, transparent 45%),
+    #0d0908;
+}
