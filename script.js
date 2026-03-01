@@ -69,6 +69,16 @@
     sessionStorage.setItem('intro-seen', '1');
     intro.classList.add('is-done');
     setTimeout(function () { intro.remove(); }, 700);
+    // Restart monogram animation from the top so it plays fresh when landing appears
+    var mv = document.querySelector('.monogram--landing video');
+    var mi = document.querySelector('.logo-static');
+    if (mv) {
+      mv.style.opacity = '1';
+      mv.style.pointerEvents = '';
+      if (mi) { mi.style.opacity = '0'; mi.style.pointerEvents = 'none'; }
+      mv.currentTime = 0;
+      mv.play();
+    }
   }
 
   function typeWord(wordIdx, charIdx) {
