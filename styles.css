@@ -553,12 +553,28 @@ button {
   flex-direction: column;
   gap: 0.65rem;
   cursor: pointer;
+  /* Entrance: hidden state — revealed by IntersectionObserver */
+  opacity: 0;
+  transform: translateY(48px) scale(0.97);
+  filter: blur(6px);
+  will-change: opacity, transform, filter;
+  transition:
+    opacity   720ms var(--ease),
+    transform 720ms var(--ease),
+    filter    480ms ease-out;
 }
 
-/*
-  Image wrapper maintains 2:3 portrait aspect ratio.
-  Handles hover scale effect on the image.
-*/
+/* Column-aware stagger — cascades left to right per row */
+.portrait-card:nth-child(3n + 2) { transition-delay: 130ms; }
+.portrait-card:nth-child(3n + 3) { transition-delay: 260ms; }
+
+.portrait-card.is-visible {
+  opacity: 1;
+  transform: none;
+  filter: blur(0);
+}
+
+/* Image wrapper */
 .portrait-card__image-wrap {
   position: relative;
   aspect-ratio: 2 / 3;
@@ -568,19 +584,39 @@ button {
   transition: border-color 400ms var(--ease);
 }
 
-.portrait-card__image-wrap img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 800ms var(--ease);
+/* Hover: warm shimmer overlay (image scale removed — parallax owns transform) */
+.portrait-card__image-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(240, 238, 233, 0);
+  transition: background 500ms var(--ease);
+  pointer-events: none;
+  z-index: 1;
 }
 
 .portrait-card:hover .portrait-card__image-wrap {
   border-color: var(--c-border-hover);
 }
 
-.portrait-card:hover .portrait-card__image-wrap img {
-  transform: scale(1.04);
+.portrait-card:hover .portrait-card__image-wrap::after {
+  background: rgba(240, 238, 233, 0.07);
+}
+
+/* Scroll-driven parallax — image floats as card travels through viewport */
+@keyframes img-parallax {
+  from { transform: scale(1.1) translateY(-6%); }
+  to   { transform: scale(1.1) translateY(6%);  }
+}
+
+.portrait-card__image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  animation: img-parallax linear both;
+  animation-timeline: view(block);
+  animation-range: entry 0% exit 100%;
 }
 
 /* Placeholder shown before real image is inserted */
