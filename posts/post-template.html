@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><!-- EDIT: Post Title --> — Wilfredo Valle</title>
+
+  <!-- Open Graph -->
+  <meta property="og:title"       content="<!-- EDIT: Post Title --> — Wilfredo Valle" />
+  <meta property="og:description" content="<!-- EDIT: One-sentence excerpt -->" />
+  <meta property="og:image"       content="https://wilfredovalle.com/assets/<!-- EDIT: cover-image.jpg -->" />
+  <meta property="og:type"        content="article" />
+  <meta property="og:url"         content="https://wilfredovalle.com/posts/<!-- EDIT: your-post-slug.html -->" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="<!-- EDIT: Post Title --> — Wilfredo Valle" />
+  <meta name="twitter:description" content="<!-- EDIT: One-sentence excerpt -->" />
+  <meta name="twitter:image"       content="https://wilfredovalle.com/assets/<!-- EDIT: cover-image.jpg -->" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=DM+Sans:wght@200;300;400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body class="page-enter">
+
+  <nav class="site-nav site-nav--backdrop" aria-label="Site navigation">
+    <a href="../index.html" class="monogram monogram--sm" aria-label="Home">
+      <img src="https://cdn.myportfolio.com/36c1c001-21d8-40e4-af9b-4cc4b1c78dab/3585c5df-0df5-4aa6-91e1-9ca46f0afceb_rwc_0x0x630x630x4096.png?h=abe2bb9f29b4bf25578cbe58fb3e97aa" alt="Wilfredo Valle" />
+    </a>
+    <div class="site-nav__links">
+      <a href="../blog.html"    class="site-nav__link site-nav__link--active">Blog</a>
+      <a href="../about.html"   class="site-nav__link">About Me</a>
+      <a href="../contact.html" class="site-nav__link">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Cover image — update src and alt -->
+  <div class="post-cover">
+    <img
+      class="post-cover__img"
+      src="../assets/<!-- EDIT: cover-image.jpg -->"
+      alt="<!-- EDIT: Alt text -->"
+    />
+    <div class="post-cover__overlay" aria-hidden="true"></div>
+    <div class="post-cover__meta">
+      <p class="post-cover__tags"><!-- EDIT: tag1, tag2 --></p>
+      <h1 class="post-cover__title"><!-- EDIT: Post Title --></h1>
+      <p class="post-cover__byline"><!-- EDIT: Mon DD, YYYY --> &nbsp;·&nbsp; <span class="js-read-time"></span></p>
+    </div>
+  </div>
+
+  <!-- Article body — build content from blocks at the bottom of this file -->
+  <article class="post-article">
+    <div class="post-body">
+
+      <!-- EDIT: Replace with your content blocks below -->
+      <p>Your lead paragraph here. This one renders in full text color — make it count.</p>
+
+    </div>
+
+    <footer class="post-footer">
+      <div class="post-share">
+        <button class="post-share__btn" id="share-btn" aria-expanded="false">Share this post</button>
+        <div class="post-share__fallback" id="share-fallback" aria-hidden="true">
+          <a class="post-share__link" href="#" id="share-x" target="_blank" rel="noopener">X ↗</a>
+          <a class="post-share__link" href="#" id="share-li" target="_blank" rel="noopener">LinkedIn ↗</a>
+          <button class="post-share__link" id="copy-link">Copy Link</button>
+        </div>
+      </div>
+      <a href="../blog.html" class="post-back">← Back to Blog</a>
+    </footer>
+  </article>
+
+  <script>
+    // Reading time (auto-calculated — do not edit)
+    const words = document.querySelector('.post-body').innerText.trim().split(/\s+/).length;
+    const mins  = Math.max(1, Math.round(words / 200));
+    document.querySelectorAll('.js-read-time').forEach(el => el.textContent = `${mins} min read`);
+
+    // Share (do not edit)
+    const btn      = document.getElementById('share-btn');
+    const fallback = document.getElementById('share-fallback');
+    const shareX   = document.getElementById('share-x');
+    const shareLi  = document.getElementById('share-li');
+
+    const encoded      = encodeURIComponent(location.href);
+    const encodedTitle = encodeURIComponent(document.title);
+    shareX.href  = `https://twitter.com/intent/tweet?url=${encoded}&text=${encodedTitle}`;
+    shareLi.href = `https://www.linkedin.com/sharing/share-offsite/?url=${encoded}`;
+
+    btn.addEventListener('click', async () => {
+      if (navigator.share) {
+        try {
+          await navigator.share({ title: document.title, url: location.href });
+        } catch (_) { /* user cancelled */ }
+      } else {
+        const isOpen = fallback.classList.toggle('is-open');
+        btn.setAttribute('aria-expanded', String(isOpen));
+        fallback.setAttribute('aria-hidden', String(!isOpen));
+      }
+    });
+
+    document.getElementById('copy-link').addEventListener('click', (e) => {
+      navigator.clipboard.writeText(location.href).then(() => {
+        e.target.textContent = 'Copied!';
+        setTimeout(() => { e.target.textContent = 'Copy Link'; }, 2000);
+      });
+    });
+  </script>
+
+</body>
+</html>
+
+<!--
+  ╔══════════════════════════════════════════════════════════════╗
+  ║  CONTENT BLOCK REFERENCE — copy/paste into .post-body above ║
+  ╚══════════════════════════════════════════════════════════════╝
+
+  PARAGRAPH
+  ─────────
+  <p>Your text here.</p>
+
+  SUBHEADING (H2)
+  ───────────────
+  <h2>Section Title</h2>
+
+  MINOR HEADING (H3)
+  ──────────────────
+  <h3>Sub-section</h3>
+
+  PULL QUOTE
+  ──────────
+  <blockquote>Something worth pausing on.</blockquote>
+
+  PHOTO (upload image to /assets/, update src)
+  ────────────────────────────────────────────
+  <figure class="post-figure">
+    <img src="../assets/your-photo.jpg" alt="Description" />
+    <figcaption>Optional caption text.</figcaption>
+  </figure>
+
+  VIDEO (paste YouTube embed URL)
+  ───────────────────────────────
+  <div class="post-video">
+    <iframe src="https://www.youtube.com/embed/VIDEO_ID"
+      frameborder="0" allowfullscreen loading="lazy"></iframe>
+  </div>
+
+  DIVIDER
+  ───────
+  <hr />
+
+  ══════════════════════════════════════════════════════════════
+  ADDING TO THE BLOG INDEX
+  ══════════════════════════════════════════════════════════════
+  1. Save this file as posts/your-post-slug.html
+  2. Open posts/posts.json
+  3. Add one entry at the TOP of the array:
+
+  {
+    "slug": "posts/your-post-slug.html",
+    "title": "Your Post Title",
+    "date": "YYYY-MM-DD",
+    "excerpt": "One-sentence description shown on the index card.",
+    "cover": "../assets/your-cover-image.jpg",
+    "tags": ["tag1", "tag2"]
+  },
+
+  That's it. The blog index auto-renders. No other files needed.
+-->

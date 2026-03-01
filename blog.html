@@ -10,24 +10,96 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body class="page-enter">
-  <div class="bg-image"   aria-hidden="true"></div>
-  <div class="bg-overlay" aria-hidden="true"></div>
 
-  <nav class="site-nav" aria-label="Site navigation">
+  <nav class="site-nav site-nav--backdrop" aria-label="Site navigation">
     <a href="index.html" class="monogram monogram--sm" aria-label="Home">
       <img src="https://cdn.myportfolio.com/36c1c001-21d8-40e4-af9b-4cc4b1c78dab/3585c5df-0df5-4aa6-91e1-9ca46f0afceb_rwc_0x0x630x630x4096.png?h=abe2bb9f29b4bf25578cbe58fb3e97aa" alt="Wilfredo Valle" />
     </a>
     <div class="site-nav__links">
-      <a href="blog.html"    class="site-nav__link">Blog</a>
+      <a href="blog.html"    class="site-nav__link site-nav__link--active">Blog</a>
       <a href="about.html"   class="site-nav__link">About Me</a>
       <a href="contact.html" class="site-nav__link">Contact</a>
     </div>
   </nav>
 
-  <main class="stub-page" aria-label="Blog">
-    <h1 class="stub-page__title">Blog</h1>
-    <p class="stub-page__msg">Coming soon</p>
+  <main class="blog-page">
+    <header class="blog-hero">
+      <span class="blog-hero__label">Blog</span>
+      <h1 class="blog-hero__heading">Notes on tech &amp; ai,<br>people &amp; craft.</h1>
+    </header>
+
+    <section class="blog-grid" id="blog-grid" aria-label="Blog posts">
+      <template id="post-card-tpl">
+        <article class="blog-card">
+          <a class="blog-card__cover-link">
+            <div class="blog-card__cover">
+              <img class="blog-card__img" alt="" />
+            </div>
+          </a>
+          <div class="blog-card__body">
+            <p class="blog-card__tags"></p>
+            <h2 class="blog-card__title"></h2>
+            <p class="blog-card__excerpt"></p>
+            <p class="blog-card__meta"></p>
+          </div>
+        </article>
+      </template>
+    </section>
   </main>
+
+  <script src="posts/posts.js"></script>
+  <script>
+    (() => {
+      const grid  = document.getElementById('blog-grid');
+      const tpl   = document.getElementById('post-card-tpl');
+      const posts = window.BLOG_POSTS || [];
+
+      if (!posts.length) {
+        grid.innerHTML = '<p class="blog-empty">No posts yet.</p>';
+        return;
+      }
+
+      // Sort newest first
+      posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+      posts.forEach((post, i) => {
+        const frag  = tpl.content.cloneNode(true);
+        const card  = frag.querySelector('.blog-card');
+        const link  = frag.querySelector('.blog-card__cover-link');
+        const img   = frag.querySelector('.blog-card__img');
+        const tags  = frag.querySelector('.blog-card__tags');
+        const title = frag.querySelector('.blog-card__title');
+        const exc   = frag.querySelector('.blog-card__excerpt');
+        const meta  = frag.querySelector('.blog-card__meta');
+
+        const href = post.slug;
+        link.href  = href;
+        // Also wrap title in a link
+        const titleLink = document.createElement('a');
+        titleLink.href  = href;
+        titleLink.className = 'blog-card__title-link';
+        titleLink.textContent = post.title;
+        title.appendChild(titleLink);
+
+        img.src = post.cover;
+        img.alt = post.title;
+
+        tags.textContent = (post.tags || []).join(', ');
+
+        exc.textContent  = post.excerpt;
+
+        const d = new Date(post.date + 'T00:00:00');
+        const dateStr = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        meta.textContent = dateStr;
+
+        // Stagger: 0, 80, 160ms per card
+        card.style.animationDelay = `${i * 80}ms`;
+
+        grid.appendChild(frag);
+      });
+    })();
+  </script>
+
 
 </body>
 </html>
