@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wilfredo Valle — Coming Soon</title>
+  <meta name="description" content="Something is coming. Wilfredo Valle — San Francisco." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=DM+Sans:wght@200;300;400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=2" />
+</head>
+<body>
+
+  <div id="js-intro" class="word-intro" aria-live="polite" aria-label="Teaser">
+    <canvas class="word-intro__canvas" aria-hidden="true"></canvas>
+    <span class="word-intro__display"></span><span class="word-intro__cursor">|</span>
+    <span class="word-intro__credit" id="js-credit">March 2026</span>
+  </div>
+
+  <style>
+    /* Keep words on one line at all viewport widths */
+    .word-intro__display,
+    .word-intro__cursor {
+      white-space: nowrap;
+      font-size: clamp(1.6rem, 8vw, 8rem);
+    }
+
+    /* Slow fade for "Coming Soon" — teaser page only */
+    .word-intro__display.is-farewell {
+      transition: opacity 2000ms ease, text-shadow 2000ms ease;
+      opacity: 0;
+      text-shadow: none;
+    }
+
+    /* End credit — fades in after "Coming Soon" disappears */
+    .word-intro__credit {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+      font-family: var(--f-ui, 'DM Sans', sans-serif);
+      font-size: clamp(0.65rem, 1.5vw, 0.85rem);
+      font-weight: 300;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(243, 241, 238, 0.45);
+      opacity: 0;
+      transition: opacity 1500ms ease;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+
+    .word-intro__credit.is-visible {
+      opacity: 1;
+    }
+  </style>
+
+  <script>
+    (function () {
+      'use strict';
+
+      var intro   = document.getElementById('js-intro');
+      var display = intro.querySelector('.word-intro__display');
+      var cursor  = intro.querySelector('.word-intro__cursor');
+      var credit  = document.getElementById('js-credit');
+      var canvas  = intro.querySelector('.word-intro__canvas');
+      var ctx     = canvas.getContext('2d');
+
+      // --- Matrix rain ---
+      var FONT_SIZE = 14;
+      var CHARS = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      var drops, rainInterval;
+
+      function initCanvas() {
+        canvas.width  = window.innerWidth;
+        canvas.height = window.innerHeight;
+        ctx.fillStyle = '#000';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        drops = new Array(Math.floor(canvas.width / FONT_SIZE)).fill(1);
+      }
+
+      function drawRain() {
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.font = FONT_SIZE + 'px monospace';
+
+        for (var i = 0; i < drops.length; i++) {
+          var char = CHARS[Math.floor(Math.random() * CHARS.length)];
+          ctx.fillStyle = drops[i] === 1 ? '#ccffcc' : '#00ff41';
+          ctx.fillText(char, i * FONT_SIZE, drops[i] * FONT_SIZE);
+
+          if (drops[i] * FONT_SIZE > canvas.height && Math.random() > 0.975) {
+            drops[i] = 0;
+          }
+          drops[i]++;
+        }
+      }
+
+      initCanvas();
+      window.addEventListener('resize', initCanvas);
+      rainInterval = setInterval(drawRain, 33); // ~30 fps
+
+      // --- Typewriter ---
+      var WORDS      = ['Creative', 'Designer', 'Technologist', 'Program Manager', 'AI Evangelist', 'Coming Soon'];
+      var CHAR_DELAY = 90;
+      var HOLD       = 700;
+      var CLEAR_GAP  = 180;
+      var timer;
+
+      function farewell() {
+        clearTimeout(timer);
+        // Hold 1000ms → fade "Coming Soon" out (2000ms)
+        setTimeout(function () {
+          display.classList.add('is-farewell');
+          cursor.style.display = 'none';
+          // After "Coming Soon" is gone → fade in "March 2026" credit and hold
+          setTimeout(function () {
+            credit.classList.add('is-visible');
+          }, 2200); // slightly past the 2000ms fade-out
+        }, 1000);
+      }
+
+      function typeWord(wordIdx, charIdx) {
+        var word = WORDS[wordIdx];
+        display.textContent = word.slice(0, charIdx);
+        if (charIdx < word.length) {
+          timer = setTimeout(function () { typeWord(wordIdx, charIdx + 1); }, CHAR_DELAY);
+        } else if (wordIdx === WORDS.length - 1) {
+          farewell(); // last word — slow fade + redirect
+        } else {
+          timer = setTimeout(function () {
+            display.textContent = '';
+            timer = setTimeout(function () { typeWord(wordIdx + 1, 0); }, CLEAR_GAP);
+          }, HOLD);
+        }
+      }
+
+      typeWord(0, 0);
+    }());
+  </script>
+
+</body>
+</html>

@@ -7,8 +7,7 @@
 (function () {
   'use strict';
 
-  // Commented out during development — uncomment when ready to ship:
-  // if (sessionStorage.getItem('intro-seen')) return;
+  if (sessionStorage.getItem('intro-seen')) return;
 
   var intro = document.getElementById('js-intro');
   if (!intro) return;
